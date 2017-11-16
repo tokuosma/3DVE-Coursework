@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour {
     public float speed = 2f;
     //public float jumpSensitivity;
     public float mouseSensitivity = 5f;
+    public float gravityAcc = 10f;
+
 
     CharacterController player;
     public GameObject eyes;
@@ -28,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //Player movement
+        //Player movement and view orientation
         movementFB = Input.GetAxis("Vertical") * speed;
         movementLR = Input.GetAxis("Horizontal") * speed;
 
@@ -42,7 +44,14 @@ public class PlayerController : MonoBehaviour {
 
         transform.Rotate(0, rotX, 0);
         eyes.transform.Rotate(-rotY, 0, 0);
-        //Mouse movement
+        //Gravity
+        if (player.isGrounded == false)
+        {
+
+            Vector3 falling = new Vector3(0, -gravityAcc, 0);
+            player.Move(falling * Time.deltaTime);
+
+        }
 
 
 
