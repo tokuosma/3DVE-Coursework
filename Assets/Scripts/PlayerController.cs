@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         //Player movement and view orientation
         movementFB = Input.GetAxis("Vertical") * speed;
         movementLR = Input.GetAxis("Horizontal") * speed;
@@ -43,7 +43,33 @@ public class PlayerController : MonoBehaviour {
 
 
         transform.Rotate(0, rotX, 0);
+        
         eyes.transform.Rotate(-rotY, 0, 0);
+
+
+
+       // Vector3 clamped = new Vector3(
+       // Mathf.Clamp(eyes.transform.localEulerAngles.x, 0.0f, 360.0f),
+       // eyes.transform.localEulerAngles.y,
+       // eyes.transform.localEulerAngles.z);
+        
+       // eyes.transform.localEulerAngles = clamped;
+        Debug.Log(eyes.transform.localRotation.eulerAngles.x);
+
+        if (eyes.transform.localRotation.x < -0.5f)
+        {
+            eyes.transform.localRotation = new Quaternion(-0.5f, eyes.transform.localRotation.y, eyes.transform.localRotation.z, eyes.transform.localRotation.w);
+            Debug.Log("Hello1");
+            Debug.Log(eyes.transform.localRotation.x);
+        }
+        if (eyes.transform.localRotation.x > 0.5f)
+        {
+            
+            eyes.transform.localEulerAngles = new Vector3(90f, eyes.transform.localEulerAngles.y, eyes.transform.localEulerAngles.z);
+            Debug.Log("Hello2");
+        }
+
+
         //Gravity
         if (player.isGrounded == false)
         {
