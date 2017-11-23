@@ -48,25 +48,28 @@ public class PlayerController : MonoBehaviour {
 
 
 
-       // Vector3 clamped = new Vector3(
-       // Mathf.Clamp(eyes.transform.localEulerAngles.x, 0.0f, 360.0f),
-       // eyes.transform.localEulerAngles.y,
-       // eyes.transform.localEulerAngles.z);
-        
-       // eyes.transform.localEulerAngles = clamped;
-        Debug.Log(eyes.transform.localRotation.eulerAngles.x);
+        // Vector3 clamped = new Vector3(
+        // Mathf.Clamp(eyes.transform.localEulerAngles.x, 0.0f, 360.0f),
+        // eyes.transform.localEulerAngles.y,
+        // eyes.transform.localEulerAngles.z);
 
-        if (eyes.transform.localRotation.x < -0.5f)
+        // eyes.transform.localEulerAngles = clamped;
+        //Debug.Log(eyes.transform.localRotation.eulerAngles.x);
+
+        if (!(eyes.transform.localRotation.eulerAngles.x >= 270f && eyes.transform.localRotation.eulerAngles.x < 360f))
         {
-            eyes.transform.localRotation = new Quaternion(-0.5f, eyes.transform.localRotation.y, eyes.transform.localRotation.z, eyes.transform.localRotation.w);
-            Debug.Log("Hello1");
-            Debug.Log(eyes.transform.localRotation.x);
+            eyes.transform.localEulerAngles = new Vector3(Mathf.Clamp(eyes.transform.localEulerAngles.x, -1f, 80f ), eyes.transform.localEulerAngles.y, 0);
+            Debug.Log("Lower");
+            Debug.Log(Mathf.Clamp(eyes.transform.localEulerAngles.x, -1f, 80.0f));
+            // Debug.Log(eyes.transform.localRotation.x);
         }
-        if (eyes.transform.localRotation.x > 0.5f)
+        if (!(eyes.transform.localRotation.eulerAngles.x >= -1f && eyes.transform.localRotation.eulerAngles.x <= 90f))
         {
-            
-            eyes.transform.localEulerAngles = new Vector3(90f, eyes.transform.localEulerAngles.y, eyes.transform.localEulerAngles.z);
-            Debug.Log("Hello2");
+
+            eyes.transform.localEulerAngles = new Vector3(Mathf.Clamp(Mathf.Abs(eyes.transform.localEulerAngles.x), 280.0f, 370f), eyes.transform.localEulerAngles.y, 0);
+            Debug.Log("Upper");
+            Debug.Log(Mathf.Abs(eyes.transform.localEulerAngles.x));
+            Debug.Log(Mathf.Clamp(Mathf.Abs(eyes.transform.localEulerAngles.x), 280f, 370f));
         }
 
 
