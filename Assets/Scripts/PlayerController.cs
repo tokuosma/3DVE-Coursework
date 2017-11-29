@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     //public float jumpSensitivity;
     public float mouseSensitivity = 5f;
     public float gravityAcc = 10f;
+    public bool gravity = true;
 
 
     CharacterController player;
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour {
         {
             eyes.transform.localEulerAngles = new Vector3(Mathf.Clamp(eyes.transform.localEulerAngles.x, -1f, 80f ), eyes.transform.localEulerAngles.y, 0);
             Debug.Log("Lower");
-            Debug.Log(Mathf.Clamp(eyes.transform.localEulerAngles.x, -1f, 80.0f));
+           // Debug.Log(Mathf.Clamp(eyes.transform.localEulerAngles.x, -1f, 80.0f));
             // Debug.Log(eyes.transform.localRotation.x);
         }
         if (!(eyes.transform.localRotation.eulerAngles.x >= -1f && eyes.transform.localRotation.eulerAngles.x <= 90f))
@@ -68,21 +69,25 @@ public class PlayerController : MonoBehaviour {
 
             eyes.transform.localEulerAngles = new Vector3(Mathf.Clamp(Mathf.Abs(eyes.transform.localEulerAngles.x), 280.0f, 370f), eyes.transform.localEulerAngles.y, 0);
             Debug.Log("Upper");
-            Debug.Log(Mathf.Abs(eyes.transform.localEulerAngles.x));
-            Debug.Log(Mathf.Clamp(Mathf.Abs(eyes.transform.localEulerAngles.x), 280f, 370f));
+           // Debug.Log(Mathf.Abs(eyes.transform.localEulerAngles.x));
+           // Debug.Log(Mathf.Clamp(Mathf.Abs(eyes.transform.localEulerAngles.x), 280f, 370f));
         }
 
 
         //Gravity
-        if (player.isGrounded == false)
+        if (gravity)
         {
 
-            Vector3 falling = new Vector3(0, -gravityAcc, 0);
-            player.Move(falling * Time.deltaTime);
+
+            if (player.isGrounded == false)
+            {
+
+                Vector3 falling = new Vector3(0, -gravityAcc, 0);
+                player.Move(falling * Time.deltaTime);
+
+            }
 
         }
-
-
 
 
 
