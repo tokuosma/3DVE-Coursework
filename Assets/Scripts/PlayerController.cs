@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour {
         if (!(eyes.transform.localRotation.eulerAngles.x >= 270f && eyes.transform.localRotation.eulerAngles.x < 360f))
         {
             eyes.transform.localEulerAngles = new Vector3(Mathf.Clamp(eyes.transform.localEulerAngles.x, -1f, 80f ), eyes.transform.localEulerAngles.y, 0);
-            Debug.Log("Lower");
+            //Debug.Log("Lower");
            // Debug.Log(Mathf.Clamp(eyes.transform.localEulerAngles.x, -1f, 80.0f));
             // Debug.Log(eyes.transform.localRotation.x);
         }
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
         {
 
             eyes.transform.localEulerAngles = new Vector3(Mathf.Clamp(Mathf.Abs(eyes.transform.localEulerAngles.x), 280.0f, 370f), eyes.transform.localEulerAngles.y, 0);
-            Debug.Log("Upper");
+            //Debug.Log("Upper");
            // Debug.Log(Mathf.Abs(eyes.transform.localEulerAngles.x));
            // Debug.Log(Mathf.Clamp(Mathf.Abs(eyes.transform.localEulerAngles.x), 280f, 370f));
         }
