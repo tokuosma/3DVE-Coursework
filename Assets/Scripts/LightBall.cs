@@ -6,6 +6,7 @@ public class LightBall : MonoBehaviour {
 
     public bool Charged { get { return charged; } }
     public GameObject ChargeParticles;
+    public GameObject BlastPrefab;
     public float maxSize;
     public float chargeSpeed;
 
@@ -25,6 +26,14 @@ public class LightBall : MonoBehaviour {
 		
 	}
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.tag != "Player")
+        {
+            var blast = Instantiate(BlastPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
 
     public void StartCharge()
     {
