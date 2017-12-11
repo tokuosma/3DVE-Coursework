@@ -3,19 +3,19 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 
-public class MoveTo : MonoBehaviour {
+public class Witch : MonoBehaviour {
 
-	public Transform goal;
+	public Transform PlayerTransform;
 	private NavMeshAgent agent;
     
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
-		agent.SetDestination (goal.transform.position);
+		agent.SetDestination (PlayerTransform.transform.position);
 		
 	}	
 
 	void Update(){
-        agent.SetDestination(goal.transform.position);
+        agent.SetDestination(PlayerTransform.transform.position);
 
     }
 
