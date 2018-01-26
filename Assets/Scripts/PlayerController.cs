@@ -7,30 +7,52 @@ public class PlayerController : MonoBehaviour {
     public float speed = 2f;
     //public float jumpSensitivity;
     public float mouseSensitivity = 5f;
+    public float MinimumX = -90F;
+    public float MaximumX = 90F;
     public float gravityAcc = 10f;
     public bool gravity = true;
 
 
     CharacterController player;
-    public GameObject eyes;
+    public Camera eyes;
 
     float movementFB;
     float movementLR;
 
     float rotX;
     float rotY;
-    
 
-	// Use this for initialization
-	void Start () {
+    Quaternion ClampRotationAroundXAxis(Quaternion q)
+    {
+        q.x /= q.w;
+        q.y /= q.w;
+        q.z /= q.w;
+        q.w = 1.0f;
+
+        float angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan(q.x);
+
+        angleX = Mathf.Clamp(angleX, MinimumX, MaximumX);
+
+        q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
+
+        return q;
+    }
+
+
+
+
+// Use this for initialization
+void Start () {
 
         player = GetComponent<CharacterController>();
+     
 
-		
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+    }
+
+
+// Update is called once per frame
+void FixedUpdate () {
+
         //Player movement and view orientation
         movementFB = Input.GetAxis("Vertical") * speed;
         movementLR = Input.GetAxis("Horizontal") * speed;
@@ -38,40 +60,29 @@ public class PlayerController : MonoBehaviour {
         rotX = Input.GetAxis("Mouse X") * mouseSensitivity;
         rotY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        Vector3 movement = new Vector3(movementFB, 0, -movementLR);
+
+
+        Vector3 movement = new Vector3(movementLR, 0, movementFB);
         movement = transform.rotation * movement;
         player.Move(movement * Time.deltaTime);
 
 
+
+
+
+        Debug.Log(eyes.transform.rotation.eulerAngles);
+
+
         transform.Rotate(0, rotX, 0);
-        
         eyes.transform.Rotate(-rotY, 0, 0);
 
+        eyes.transform.localRotation = ClampRotationAroundXAxis(eyes.transform.localRotation);
 
-
-        // Vector3 clamped = new Vector3(
-        // Mathf.Clamp(eyes.transform.localEulerAngles.x, 0.0f, 360.0f),
-        // eyes.transform.localEulerAngles.y,
-        // eyes.transform.localEulerAngles.z);
-
-        // eyes.transform.localEulerAngles = clamped;
-        //Debug.Log(eyes.transform.localRotation.eulerAngles.x);
-
-        if (!(eyes.transform.localRotation.eulerAngles.x >= 270f && eyes.transform.localRotation.eulerAngles.x < 360f))
+        if(eyes.transform.localRotation.eulerAngles.y != 0f || eyes.transform.localRotation.eulerAngles.z != 0)
         {
-            eyes.transform.localEulerAngles = new Vector3(Mathf.Clamp(eyes.transform.localEulerAngles.x, -1f, 80f ), eyes.transform.localEulerAngles.y, 0);
-            //Debug.Log("Lower");
-           // Debug.Log(Mathf.Clamp(eyes.transform.localEulerAngles.x, -1f, 80.0f));
-            // Debug.Log(eyes.transform.localRotation.x);
+            eyes.transform.localEulerAngles = new Vector3(eyes.transform.localEulerAngles.x, 0f, 0f);
         }
-        if (!(eyes.transform.localRotation.eulerAngles.x >= -1f && eyes.transform.localRotation.eulerAngles.x <= 90f))
-        {
 
-            eyes.transform.localEulerAngles = new Vector3(Mathf.Clamp(Mathf.Abs(eyes.transform.localEulerAngles.x), 280.0f, 370f), eyes.transform.localEulerAngles.y, 0);
-            //Debug.Log("Upper");
-           // Debug.Log(Mathf.Abs(eyes.transform.localEulerAngles.x));
-           // Debug.Log(Mathf.Clamp(Mathf.Abs(eyes.transform.localEulerAngles.x), 280f, 370f));
-        }
 
 
         //Gravity
