@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 2f;
-    //public float jumpSensitivity;
     public float mouseSensitivity = 5f;
     public float MinimumX = -90F;
     public float MaximumX = 90F;
@@ -67,17 +66,16 @@ void FixedUpdate () {
         player.Move(movement * Time.deltaTime);
 
 
-
-
-
-        Debug.Log(eyes.transform.rotation.eulerAngles);
-
-
+        //Rotate player and eyes
         transform.Rotate(0, rotX, 0);
         eyes.transform.Rotate(-rotY, 0, 0);
 
+
+        //Clamp rotation according to minimum and maximum angles (MinimumX and MaximumX)
         eyes.transform.localRotation = ClampRotationAroundXAxis(eyes.transform.localRotation);
 
+
+        //if eyes rotate on any axes besides x (up - down), return them to zero
         if(eyes.transform.localRotation.eulerAngles.y != 0f || eyes.transform.localRotation.eulerAngles.z != 0)
         {
             eyes.transform.localEulerAngles = new Vector3(eyes.transform.localEulerAngles.x, 0f, 0f);
