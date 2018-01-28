@@ -8,9 +8,11 @@ ModelImporter:
     100000: Camera
     100002: //RootNode
     100004: GhostDetector
+    100006: Screen
     400000: Camera
     400002: //RootNode
     400004: GhostDetector
+    400006: Screen
     2000000: Camera
     2100000: AntennaMaterial
     2100002: ScreenMaterial
@@ -18,9 +20,12 @@ ModelImporter:
     2100006: BodyMaterial
     2300000: GhostDetector
     2300002: //RootNode
+    2300004: Screen
     3300000: GhostDetector
     3300002: //RootNode
+    3300004: Screen
     4300000: GhostDetector
+    4300002: Screen
   externalObjects:
   - first:
       type: UnityEngine:Material
