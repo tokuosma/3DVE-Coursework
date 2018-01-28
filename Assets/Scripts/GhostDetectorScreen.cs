@@ -70,6 +70,11 @@ public class GhostDetectorScreen : MonoBehaviour {
         {
             bodyText.text = string.Format("Haunting Detected!\nNumber of hauntings: {0}\nClosest haunting: {1:F1}", ghostMeterProximityCollider.NumberOfHauntedObjectsDetected, ghostMeterProximityCollider.ClosestHauntedObjectDistance );
         }
+        else if(!hasMessage)
+        {
+            bodyText.text = string.Format("No hauntings detected nearby");
+        }
+
 	}
 
     private void CheckScanInterrupt()
