@@ -5,7 +5,7 @@ using UnityEngine;
 public class HauntedObject : MonoBehaviour {
 
     public bool isScanned;
-    private static float emissionIncrement = 0.1f;
+    private static float emissionIncrement = 0.03f;
 	// Use this for initialization
 	void Start () {
         isScanned = false;
@@ -37,14 +37,14 @@ public class HauntedObject : MonoBehaviour {
             finalColor = baseColor * emissionScale;
             mat.SetColor("_EmissionColor", finalColor);
             emissionScale += emissionIncrement;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
         }
         while (emissionScale > 0)
         {
             finalColor = baseColor * emissionScale;
             mat.SetColor("_EmissionColor", finalColor);
-            emissionScale -= emissionIncrement;
-            yield return new WaitForSeconds(0.1f);
+            emissionScale -= emissionIncrement / 2;
+            yield return new WaitForSeconds(0.01f);
         }
 
         Destroy(this);
