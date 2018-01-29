@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
     private List<SpawnPoint> spawnPoints;
 
     public GameObject WitchPrefab;
+    public GameObject DeathExplosionPrefab;
     
     private GameObject spawnedWitch;
 
