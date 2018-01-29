@@ -2,29 +2,45 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using UnityEngine.PostProcessing;
 
 public class Witch : MonoBehaviour {
 
-	public Transform PlayerTransform;
+    public AudioClip spawnSound;
+    public AudioClip deathSound;
+
+	private GameObject player;
+    private PostProcessingProfile defaultProfile;
 	private NavMeshAgent agent;
     private Vector3 startPosition;
-    
-	void Start () {
+
+    void Start () {
+        player= FindObjectOfType<PlayerController>().gameObject;
 		agent = GetComponent<NavMeshAgent> ();
-		agent.SetDestination (PlayerTransform.transform.position);
+        defaultProfile = FindObjectOfType<Camera>().gameObject.GetComponent<PostProcessingBehaviour>().profile;
+        agent.SetDestination (player.transform.position);
         startPosition = transform.position;
 	}	
 
 	void Update(){
-        agent.SetDestination(PlayerTransform.transform.position);
-
+        agent.SetDestination(player.transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Projectile")
         {
-            transform.position = startPosition;
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        //PLAY ANIMATION HERE
+        GetComponentInChildren<PostProcessVolume>().enabled = false;
+        GetComponent<AudioSource>().PlayOneShot(deathSound);
+        agent.isStopped = true ;
+        FindObjectOfType<Camera>().gameObject.GetComponent<PostProcessingBehaviour>().profile = defaultProfile;
+        Destroy(gameObject, deathSound.length);
     }
 }
