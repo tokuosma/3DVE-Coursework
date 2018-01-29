@@ -177,6 +177,46 @@ public class PostProcessVolume : MonoBehaviour
 
     }
 
+    public void ResetValues(PostProcessingProfile resetProfile)
+    {
+        if (resetProfile == null)
+        {
+            Debug.LogError("No ProfileEntered");
+            return;
+        }
+
+        //Enable/disable elements
+        antialiasing.enabled = resetProfile.antialiasing.enabled;
+        ambientOcclusion.enabled = resetProfile.ambientOcclusion.enabled;
+        screenSpaceReflection.enabled = resetProfile.screenSpaceReflection.enabled;
+        depthOfField.enabled = resetProfile.depthOfField.enabled;
+        motionBlur.enabled = resetProfile.motionBlur.enabled;
+        eyeAdaptation.enabled = resetProfile.eyeAdaptation.enabled;
+        bloom.enabled = resetProfile.bloom.enabled;
+        colorGrading.enabled = resetProfile.colorGrading.enabled;
+        userLut.enabled = resetProfile.userLut.enabled;
+        chromaticAberration.enabled = resetProfile.chromaticAberration.enabled;
+        grain.enabled = resetProfile.grain.enabled;
+        vignette.enabled = resetProfile.vignette.enabled;
+        dithering.enabled = resetProfile.dithering.enabled;
+
+        //Copy settings
+        antialiasing.settings = resetProfile.antialiasing.settings;
+        ambientOcclusion.settings = resetProfile.ambientOcclusion.settings;
+        screenSpaceReflection.settings = resetProfile.screenSpaceReflection.settings;
+        depthOfField.settings = resetProfile.depthOfField.settings;
+        motionBlur.settings = resetProfile.motionBlur.settings;
+        eyeAdaptation.settings = resetProfile.eyeAdaptation.settings;
+        bloom.settings = resetProfile.bloom.settings;
+        colorGrading.settings = resetProfile.colorGrading.settings;
+        userLut.settings = resetProfile.userLut.settings;
+        chromaticAberration.settings = resetProfile.chromaticAberration.settings;
+        grain.settings = resetProfile.grain.settings;
+        vignette.settings = resetProfile.vignette.settings;
+        dithering.settings = resetProfile.dithering.settings;
+
+    }
+
 
     public void CheckColliderShape()
     {

@@ -10,14 +10,14 @@ public class Witch : MonoBehaviour {
     public AudioClip deathSound;
 
 	private GameObject player;
-    private PostProcessingProfile defaultProfile;
+    private PostProcessVolume postProcessVolume;
 	private NavMeshAgent agent;
     private Vector3 startPosition;
 
     void Start () {
         player= FindObjectOfType<PlayerController>().gameObject;
 		agent = GetComponent<NavMeshAgent> ();
-        defaultProfile = FindObjectOfType<Camera>().gameObject.GetComponent<PostProcessingBehaviour>().profile;
+        postProcessVolume = GetComponentInChildren<PostProcessVolume>();
         agent.SetDestination (player.transform.position);
         startPosition = transform.position;
 	}	
@@ -37,10 +37,9 @@ public class Witch : MonoBehaviour {
     private void Die()
     {
         //PLAY ANIMATION HERE
-        GetComponentInChildren<PostProcessVolume>().enabled = false;
+        postProcessVolume.ResetValues();
         GetComponent<AudioSource>().PlayOneShot(deathSound);
         agent.isStopped = true ;
-        FindObjectOfType<Camera>().gameObject.GetComponent<PostProcessingBehaviour>().profile = defaultProfile;
-        Destroy(gameObject, deathSound.length);
+        Destroy(gameObject, deathSound.length  );
     }
 }
