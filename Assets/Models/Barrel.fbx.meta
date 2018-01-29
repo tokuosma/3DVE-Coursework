@@ -13,7 +13,18 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Rim3
-  externalObjects: {}
+    6400000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 639827459793fce4496ddc7448d8ccff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: c86b91ba5dc591646a585db1b34e5f57, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -45,7 +56,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
