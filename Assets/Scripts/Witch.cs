@@ -4,30 +4,35 @@ using UnityEngine.AI;
 using System.Collections.Generic;
 using UnityEngine.PostProcessing;
 
-public class Witch : MonoBehaviour {
+public class Witch : MonoBehaviour
+{
 
     public AudioClip spawnSound;
     public AudioClip deathSound;
-	private GameObject player;
+    public float attackDistance;
+    private GameObject player;
     private PostProcessVolume postProcessVolume;
-	private NavMeshAgent agent;
-    private Vector3 startPosition;
+    private NavMeshAgent agent;
+    private Animator animator;
 
-    void Start () {
-        player= FindObjectOfType<PlayerController>().gameObject;
-		agent = GetComponent<NavMeshAgent> ();
+    void Start()
+    {
+        player = FindObjectOfType<PlayerController>().gameObject;
+        agent = GetComponent<NavMeshAgent>();
         postProcessVolume = GetComponentInChildren<PostProcessVolume>();
-        agent.SetDestination (player.transform.position);
-        startPosition = transform.position;
-	}	
-
-	void Update(){
         agent.SetDestination(player.transform.position);
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    void Update()
+    {
+        agent.SetDestination(player.transform.position);
+        animator.SetBool("isAttacking", (player.transform.position - transform.position).magnitude <= attackDistance);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Projectile")
+        if (collision.gameObject.tag == "Projectile")
         {
             Die();
         }
@@ -37,11 +42,11 @@ public class Witch : MonoBehaviour {
     {
         //PLAY ANIMATION HERE
         postProcessVolume.ResetValues();
+        animator.SetTrigger("WitchHit");
+        GetComponent<AudioSource>().PlayOneShot(deathSound);
         Instantiate(GameController.Instance.DeathExplosionPrefab, transform.position, Quaternion.identity);
         GetComponent<Collider>().enabled = false;
-        transform.Find("Model").gameObject.SetActive(false);
-        GetComponent<AudioSource>().PlayOneShot(deathSound);
-        agent.isStopped = true ;
-        Destroy(gameObject, deathSound.length  );
+        agent.isStopped = true;
+        Destroy(gameObject, GetComponent<AudioSource>().clip.length);
     }
 }
