@@ -10,14 +10,24 @@ public class LightBall : MonoBehaviour {
     public float maxSize;
     public float chargeSpeed;
 
+    public AudioClip chargeSound;
+    public AudioClip fireSound;
+    private AudioSource audioSource;
+    private static float pitchMax = 2;
+    private static float pitchMin = 0.8f;
+
     private ParticleSystem ballParticleSystem;
     private ParticleSystem chargeParticleSystem;
     private bool charged;
 
     // Use this for initialization
     void Start () {
+
         ballParticleSystem = GetComponent<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
+
         charged = false;
+
         StartCharge();
 	}
 	
@@ -52,6 +62,8 @@ public class LightBall : MonoBehaviour {
             var size = main.startSize;
             size.constantMax += chargeSpeed;
             GetComponent<Light>().intensity += 0.1f;
+            if(audioSource.pitch < pitchMax)
+                audioSource.pitch += 0.025f;
             main.startSize = size;
 
             // Continue increasing the size while ball smaller than the maximum size
@@ -85,6 +97,9 @@ public class LightBall : MonoBehaviour {
         {
             var main = ballParticleSystem.main;
             var size = main.startSize;
+            if(audioSource.pitch > pitchMin)
+                audioSource.pitch -= 0.1f;
+            audioSource.volume -= 0.1f;
             size.constantMax -= 0.25f;
             GetComponent<Light>().intensity -= 0.25f;
             main.startSize = size;
@@ -98,6 +113,10 @@ public class LightBall : MonoBehaviour {
     public void Fire()
     {
         Vector3 velocity = transform.parent.forward * (-20.0f);
+        audioSource.Stop();
+        audioSource.loop = false;
+        audioSource.pitch = 1.0f;
+        AudioSource.PlayClipAtPoint(fireSound, transform.position);
         transform.parent = null;
         GetComponent<Rigidbody>().velocity = velocity;
         GetComponent<SphereCollider>().enabled = true;
