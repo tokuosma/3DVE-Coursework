@@ -1,0 +1,353 @@
+fileFormatVersion: 2
+guid: 4b60784ebdd117045b0ff604ff5ff91c
+timeCreated: 1517335715
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armature
+    100002: base_obj_sub
+    100004: Head
+    100006: Neck
+    100008: Spine1
+    100010: Spine2
+    100012: Spine2_001
+    100014: Spine2_002
+    100016: Spine2_003
+    100018: Spine2_004
+    100020: Spine2_005
+    100022: Spine2_006
+    100024: Spine2_007
+    100026: Spine2_008
+    100028: Spine2_009
+    100030: Spine2_010
+    100032: Spine2_011
+    100034: Spine2_012
+    100036: Spine2_013
+    100038: Spine2_014
+    100040: Spine2_015
+    100042: Spine2_016
+    100044: Spine2_017
+    100046: Spine2_018
+    100048: Spine2_019
+    100050: Spine2_020
+    100052: Spine2_021
+    100054: Spine2_022
+    100056: Spine2_023
+    100058: Spine2_024
+    100060: Spine2_025
+    100062: Spine2_026
+    100064: Spine2_027
+    100066: Spine2_028
+    100068: Spine2_029
+    100070: Spine2_030
+    100072: Spine2_031
+    100074: Spine2_032
+    100076: Spine2_033
+    100078: Spine2_034
+    100080: Spine2_035
+    100082: Spine2_036
+    100084: Spine3
+    100086: Spine4
+    100088: Spine4_001
+    100090: Spine4_002
+    100092: Spine4_003
+    100094: Spine4_004
+    100096: Spine4_005
+    100098: Spine4_006
+    100100: Spine4_007
+    100102: Spine4_008
+    100104: Spine4_009
+    100106: Spine4_010
+    100108: Spine4_011
+    100110: Spine4_012
+    100112: //RootNode
+    400000: Armature
+    400002: base_obj_sub
+    400004: Head
+    400006: Neck
+    400008: Spine1
+    400010: Spine2
+    400012: Spine2_001
+    400014: Spine2_002
+    400016: Spine2_003
+    400018: Spine2_004
+    400020: Spine2_005
+    400022: Spine2_006
+    400024: Spine2_007
+    400026: Spine2_008
+    400028: Spine2_009
+    400030: Spine2_010
+    400032: Spine2_011
+    400034: Spine2_012
+    400036: Spine2_013
+    400038: Spine2_014
+    400040: Spine2_015
+    400042: Spine2_016
+    400044: Spine2_017
+    400046: Spine2_018
+    400048: Spine2_019
+    400050: Spine2_020
+    400052: Spine2_021
+    400054: Spine2_022
+    400056: Spine2_023
+    400058: Spine2_024
+    400060: Spine2_025
+    400062: Spine2_026
+    400064: Spine2_027
+    400066: Spine2_028
+    400068: Spine2_029
+    400070: Spine2_030
+    400072: Spine2_031
+    400074: Spine2_032
+    400076: Spine2_033
+    400078: Spine2_034
+    400080: Spine2_035
+    400082: Spine2_036
+    400084: Spine3
+    400086: Spine4
+    400088: Spine4_001
+    400090: Spine4_002
+    400092: Spine4_003
+    400094: Spine4_004
+    400096: Spine4_005
+    400098: Spine4_006
+    400100: Spine4_007
+    400102: Spine4_008
+    400104: Spine4_009
+    400106: Spine4_010
+    400108: Spine4_011
+    400110: Spine4_012
+    400112: //RootNode
+    2100000: DefaultSkin
+    2100002: bob02__bob02_diffuse_png
+    2100004: Eye_grey__grey_eye_png
+    2100006: tongue01Material__tongue01_diffuse_png
+    4300000: base_obj_sub
+    7400000: Default Take
+    7400002: AttackAction
+    7400004: AttackAction_001
+    7400006: HitAction
+    7400008: WalkAction
+    9500000: //RootNode
+    13700000: base_obj_sub
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 49
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: AttackAction
+      takeName: AttackAction
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: AttackAction_001
+      takeName: AttackAction_001
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: HitAction
+      takeName: HitAction
+      firstFrame: 0
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: WalkAction
+      takeName: WalkAction
+      firstFrame: 0
+      lastFrame: 49
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
