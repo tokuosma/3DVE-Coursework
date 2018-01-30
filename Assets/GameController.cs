@@ -11,11 +11,13 @@ public class GameController : MonoBehaviour {
     private int objectsScanned;
 
     private List<SpawnPoint> spawnPoints;
+    private List<LabyrinthSpawnPoint> labyrinthSpawnPoint;
 
     public GameObject WitchPrefab;
     public GameObject DeathExplosionPrefab;
     
     private GameObject spawnedWitch;
+    private GameObject player;
 
     public float witchSpawnDelay;
     private bool isSpawning;
@@ -35,8 +37,8 @@ public class GameController : MonoBehaviour {
         objectsScanned = 0;
         spawnPoints = new List<SpawnPoint>(FindObjectsOfType<SpawnPoint>());
         spawnedWitch = FindObjectOfType<Witch>().gameObject;
-
-	}
+        spawnedWitch = FindObjectOfType<PlayerController>().gameObject;
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -44,7 +44,7 @@ public class Witch : MonoBehaviour
         postProcessVolume.ResetValues();
         animator.SetTrigger("WitchHit");
         GetComponent<AudioSource>().PlayOneShot(deathSound);
-        Instantiate(GameController.Instance.DeathExplosionPrefab, transform.position, Quaternion.identity);
+        Destroy(Instantiate(GameController.Instance.DeathExplosionPrefab, transform.position, Quaternion.identity), 3.0f);
         GetComponent<Collider>().enabled = false;
         agent.isStopped = true;
         Destroy(gameObject, GetComponent<AudioSource>().clip.length);
