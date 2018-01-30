@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class GhostDetectorScreen : MonoBehaviour {
 
     public Text bodyText;
+    public Text statusText;
     public float scanDistance;
     public Slider scanProgress;
 
@@ -19,12 +20,14 @@ public class GhostDetectorScreen : MonoBehaviour {
     private bool isScanning;
     private HauntedObject hauntedObject;
     private Coroutine scanCoroutine;
+    private PlayerController player;
     private bool hasMessage;
 
 	// Use this for initialization
 	void Start () {
         MeshRenderer mesh = GetComponent<MeshRenderer>();
         mainCamera = FindObjectOfType<Camera>();
+        player = FindObjectOfType<PlayerController>();
         ghostMeterProximityCollider = FindObjectOfType<GhostMeterProximityCollider>();
         scanProgress.gameObject.SetActive(false);
         isScanning = false;
@@ -75,6 +78,7 @@ public class GhostDetectorScreen : MonoBehaviour {
             bodyText.text = string.Format("No hauntings detected nearby");
         }
 
+        statusText.text = string.Format("HEALTH: {0:F0}", player.Health);
 	}
 
     private void CheckScanInterrupt()

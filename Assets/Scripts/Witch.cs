@@ -14,6 +14,10 @@ public class Witch : MonoBehaviour
     private PostProcessVolume postProcessVolume;
     private NavMeshAgent agent;
     private Animator animator;
+    private bool inRange;
+    private bool canAttack;
+
+    public float attackStrength;
 
     void Start()
     {
@@ -22,12 +26,18 @@ public class Witch : MonoBehaviour
         postProcessVolume = GetComponentInChildren<PostProcessVolume>();
         agent.SetDestination(player.transform.position);
         animator = GetComponentInChildren<Animator>();
+        canAttack = true;
     }
 
     void Update()
     {
         agent.SetDestination(player.transform.position);
-        animator.SetBool("isAttacking", (player.transform.position - transform.position).magnitude <= attackDistance);
+        inRange = (player.transform.position - transform.position).magnitude <= attackDistance;
+        animator.SetBool("isAttacking", inRange);
+        if (inRange && canAttack)
+        {
+            player.GetComponent<PlayerController>().DamagePlayer(attackStrength);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -40,7 +50,7 @@ public class Witch : MonoBehaviour
 
     private void Die()
     {
-        //PLAY ANIMATION HERE
+        canAttack = false;
         postProcessVolume.ResetValues();
         animator.SetTrigger("WitchHit");
         GetComponent<AudioSource>().PlayOneShot(deathSound);
