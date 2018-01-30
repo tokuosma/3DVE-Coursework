@@ -37,7 +37,8 @@ public class GameController : MonoBehaviour {
         objectsScanned = 0;
         spawnPoints = new List<SpawnPoint>(FindObjectsOfType<SpawnPoint>());
         spawnedWitch = FindObjectOfType<Witch>().gameObject;
-        spawnedWitch = FindObjectOfType<PlayerController>().gameObject;
+        player = FindObjectOfType<PlayerController>().gameObject;
+        isSpawning = false;
     }
 	
 	// Update is called once per frame
