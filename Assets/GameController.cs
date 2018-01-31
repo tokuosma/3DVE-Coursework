@@ -44,10 +44,18 @@ public class GameController : MonoBehaviour {
         objectsScanned = 0;
         spawnPoints = new List<SpawnPoint>(FindObjectsOfType<SpawnPoint>());
         labyrinthSpawnPoints = new List<LabyrinthSpawnPoint>(FindObjectsOfType<LabyrinthSpawnPoint>());
-        spawnedWitch = FindObjectOfType<Witch>().gameObject;
+        var witch = FindObjectOfType<Witch>();
+        if(witch != null)
+        {
+            spawnedWitch = witch.gameObject;
+            spawningEnabled = false;
+        }
+        else
+        {
+            spawningEnabled = true ;
+        }
         player = FindObjectOfType<PlayerController>();
         playerStartPosition = player.transform.position;
-        spawningEnabled = false;
         
     }
 	
