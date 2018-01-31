@@ -111,7 +111,7 @@ public class Witch : MonoBehaviour
         {
             Vector3 explosionPosition = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2));
             Destroy(Instantiate(GameController.Instance.DeathExplosionPrefab, explosionPosition, Quaternion.identity), 2.0f);
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSecondsRealtime(0.40f);
         }
         Destroy(gameObject);
         GameController.Instance.Win();

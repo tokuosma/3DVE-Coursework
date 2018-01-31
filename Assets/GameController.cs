@@ -8,8 +8,9 @@ public class GameController : MonoBehaviour {
     public static GameController Instance;
 
     private List<HauntedObject> hauntedObjects;
-    private int numberOfHauntedObjects;
-    private int objectsScanned;
+    public int numberOfHauntedObjects;
+    public int objectsScanned;
+    public bool isWinnable;
 
     private List<SpawnPoint> spawnPoints;
     private List<LabyrinthSpawnPoint> labyrinthSpawnPoints;
@@ -54,13 +55,15 @@ public class GameController : MonoBehaviour {
         {
             spawningEnabled = true ;
         }
+        isWinnable = false;
         player = FindObjectOfType<PlayerController>();
         playerStartPosition = player.transform.position;
         
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		if(spawnedWitch == null && spawningEnabled)
         {
             StartCoroutine("SpawnWitch");
@@ -99,7 +102,7 @@ public class GameController : MonoBehaviour {
         GetComponent<AudioSource>().PlayOneShot(labyrinthSound);
         Instantiate(LabyrinthEscapePrefab, exitSpawnPoint.transform.position, Quaternion.identity);
         Destroy(Instantiate(DeathExplosionPrefab, player.transform.position, Quaternion.identity),3.0f);
-        Destroy(spawnedWitch,1.0f);
+        Destroy(spawnedWitch);
         spawningEnabled = false;
     }
 
@@ -108,5 +111,19 @@ public class GameController : MonoBehaviour {
         spawningEnabled = true;
         player.transform.position = playerStartPosition;
         GetComponent<AudioSource>().PlayOneShot(rescueSound);
+    }
+
+    public void ObjectScanned(HauntedObject hauntedObject)
+    {
+        objectsScanned++;
+        if(objectsScanned >= numberOfHauntedObjects)
+        {
+            isWinnable = true;
+        }
+    }
+
+    public void Win()
+    {
+        Debug.Log("WIN!");
     }
 }
