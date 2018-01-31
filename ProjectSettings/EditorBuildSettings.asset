@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 92594047c33fe894ebf1a2bf8318c8cb
+  - enabled: 1
+    path: Assets/Scenes/tilkitty_scene.unity
+    guid: a442c96fa5d57c9428aa680d56abd349
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: 7ac3d1fd5f38e874ca6992ab1424a0ef

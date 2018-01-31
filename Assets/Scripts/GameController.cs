@@ -124,6 +124,6 @@ public class GameController : MonoBehaviour {
 
     public void Win()
     {
-        Debug.Log("WIN!");
+        LevelManager.Instance.LoadScene("WinScene");
     }
 }
