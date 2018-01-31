@@ -78,7 +78,7 @@ public class GhostDetectorScreen : MonoBehaviour {
             bodyText.text = string.Format("No hauntings detected nearby");
         }
 
-        statusText.text = string.Format("HEALTH: {0:F0}", player.Health);
+        statusText.text = string.Format("OBJECTS SCANNED: {0} / {1}\nHEALTH: {2:F0}",GameController.Instance.objectsScanned, GameController.Instance.numberOfHauntedObjects, player.Health);
 	}
 
     private void CheckScanInterrupt()

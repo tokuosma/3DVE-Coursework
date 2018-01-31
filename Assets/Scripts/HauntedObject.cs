@@ -23,6 +23,7 @@ public class HauntedObject : MonoBehaviour {
     public void SetScanned()
     {
         isScanned = true;
+        GameController.Instance.ObjectScanned(this);
         StartCoroutine("ObjectScanned");
         //Destroy(this);
     }

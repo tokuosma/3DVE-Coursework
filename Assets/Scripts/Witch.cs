@@ -1,6 +1,7 @@
 ﻿// MoveTo.cs
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.PostProcessing;
 
@@ -8,6 +9,7 @@ public class Witch : MonoBehaviour
 {
     public AudioClip spawnSound;
     public AudioClip deathSound;
+    public AudioClip finalDeathSound;
     public AudioClip hitSound;
     public float attackDistance;
     private GameObject player;
@@ -59,7 +61,7 @@ public class Witch : MonoBehaviour
     {
         agent.SetDestination(player.transform.position);
         InRange = (player.transform.position - transform.position).magnitude <= attackDistance;
-        animator.SetBool("isAttacking", InRange);
+        animator.SetBool("isAttacking", InRange && canAttack);
         //if (InRange && CanAttack)
         //{
         //    player.GetComponent<PlayerController>().DamagePlayer(attackStrength);
@@ -70,7 +72,14 @@ public class Witch : MonoBehaviour
     {
         if (collision.gameObject.tag == "Projectile")
         {
-            Die();
+            if (GameController.Instance.isWinnable)
+            {
+                StartCoroutine("DieForGood");
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 
@@ -84,5 +93,27 @@ public class Witch : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         agent.isStopped = true;
         Destroy(gameObject, GetComponent<AudioSource>().clip.length);
+    }
+
+    private IEnumerator DieForGood()
+    {
+        GetComponent<Collider>().enabled = false;
+        agent.isStopped = true;
+        CanAttack = false;
+        postProcessVolume.ResetValues();
+        animator.SetTrigger("WitchHit");
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.pitch = 0.5f;
+        audioSource.clip = finalDeathSound;
+        audioSource.Play();
+        while (audioSource.isPlaying)
+        {
+            Vector3 explosionPosition = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2));
+            Destroy(Instantiate(GameController.Instance.DeathExplosionPrefab, explosionPosition, Quaternion.identity), 2.0f);
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+        Destroy(gameObject);
+        GameController.Instance.Win();
     }
 }
