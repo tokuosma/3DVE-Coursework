@@ -6,18 +6,44 @@ using UnityEngine.PostProcessing;
 
 public class Witch : MonoBehaviour
 {
-
     public AudioClip spawnSound;
     public AudioClip deathSound;
+    public AudioClip hitSound;
     public float attackDistance;
     private GameObject player;
     private PostProcessVolume postProcessVolume;
     private NavMeshAgent agent;
     private Animator animator;
-    private bool inRange;
+    bool inRange;
     private bool canAttack;
 
     public float attackStrength;
+
+    public bool InRange
+    {
+        get
+        {
+            return inRange;
+        }
+
+        private set
+        {
+            inRange = value;
+        }
+    }
+
+    public bool CanAttack
+    {
+        get
+        {
+            return canAttack;
+        }
+
+        private set
+        {
+            canAttack = value;
+        }
+    }
 
     void Start()
     {
@@ -26,18 +52,18 @@ public class Witch : MonoBehaviour
         postProcessVolume = GetComponentInChildren<PostProcessVolume>();
         agent.SetDestination(player.transform.position);
         animator = GetComponentInChildren<Animator>();
-        canAttack = true;
+        CanAttack = true;
     }
 
     void Update()
     {
         agent.SetDestination(player.transform.position);
-        inRange = (player.transform.position - transform.position).magnitude <= attackDistance;
-        animator.SetBool("isAttacking", inRange);
-        if (inRange && canAttack)
-        {
-            player.GetComponent<PlayerController>().DamagePlayer(attackStrength);
-        }
+        InRange = (player.transform.position - transform.position).magnitude <= attackDistance;
+        animator.SetBool("isAttacking", InRange);
+        //if (InRange && CanAttack)
+        //{
+        //    player.GetComponent<PlayerController>().DamagePlayer(attackStrength);
+        //}
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -50,7 +76,7 @@ public class Witch : MonoBehaviour
 
     private void Die()
     {
-        canAttack = false;
+        CanAttack = false;
         postProcessVolume.ResetValues();
         animator.SetTrigger("WitchHit");
         GetComponent<AudioSource>().PlayOneShot(deathSound);

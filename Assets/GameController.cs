@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class GameController : MonoBehaviour {
 
@@ -11,16 +12,22 @@ public class GameController : MonoBehaviour {
     private int objectsScanned;
 
     private List<SpawnPoint> spawnPoints;
-    private List<LabyrinthSpawnPoint> labyrinthSpawnPoint;
+    private List<LabyrinthSpawnPoint> labyrinthSpawnPoints;
+
 
     public GameObject WitchPrefab;
     public GameObject DeathExplosionPrefab;
-    
-    private GameObject spawnedWitch;
-    private GameObject player;
+    public GameObject LabyrinthEscapePrefab;
+    public PostProcessingProfile defaultPlayerProfile;
+    public AudioClip labyrinthSound;
+    public AudioClip rescueSound;
+    public GameObject spawnedWitch;
+    public PlayerController player;
+
+    private Vector3 playerStartPosition;
 
     public float witchSpawnDelay;
-    private bool isSpawning;
+    private bool spawningEnabled;
 
 	// Use this for initialization
 	void Start () {
@@ -36,22 +43,29 @@ public class GameController : MonoBehaviour {
         numberOfHauntedObjects = hauntedObjects.Count;
         objectsScanned = 0;
         spawnPoints = new List<SpawnPoint>(FindObjectsOfType<SpawnPoint>());
+        labyrinthSpawnPoints = new List<LabyrinthSpawnPoint>(FindObjectsOfType<LabyrinthSpawnPoint>());
         spawnedWitch = FindObjectOfType<Witch>().gameObject;
-        player = FindObjectOfType<PlayerController>().gameObject;
-        isSpawning = false;
+        player = FindObjectOfType<PlayerController>();
+        playerStartPosition = player.transform.position;
+        spawningEnabled = false;
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if(spawnedWitch == null && !isSpawning)
+		if(spawnedWitch == null && spawningEnabled)
         {
             StartCoroutine("SpawnWitch");
+        }
+        if (player.Health <= 0)
+        {
+            SendPlayerToLabyrinth();
         }
 	}
 
     private IEnumerator SpawnWitch()
     {
-        isSpawning = true;
+        spawningEnabled = false;
         SpawnPoint spawnPoint = spawnPoints[(int)Mathf.Floor(Random.Range(0, spawnPoints.Count - 1))];
         var timer = 0f;
         while (timer < witchSpawnDelay)
@@ -60,7 +74,31 @@ public class GameController : MonoBehaviour {
             yield return null;
         }
         spawnedWitch = Instantiate(WitchPrefab, spawnPoint.transform.position, Quaternion.identity);
-        isSpawning = false;
+        spawningEnabled = true;
     }
 
+    private void SendPlayerToLabyrinth()
+    {
+        LabyrinthSpawnPoint playerSpawnPoint = labyrinthSpawnPoints[Mathf.FloorToInt(UnityEngine.Random.Range(0, labyrinthSpawnPoints.Count - 1))];
+        LabyrinthSpawnPoint exitSpawnPoint = null;
+        do
+        {
+            exitSpawnPoint = labyrinthSpawnPoints[Mathf.FloorToInt(UnityEngine.Random.Range(0, labyrinthSpawnPoints.Count - 1))];
+        } while (exitSpawnPoint == playerSpawnPoint);
+        player.Health = PlayerController.maxHealth;
+        player.transform.position = playerSpawnPoint.transform.position;
+
+        GetComponent<AudioSource>().PlayOneShot(labyrinthSound);
+        Instantiate(LabyrinthEscapePrefab, exitSpawnPoint.transform.position, Quaternion.identity);
+        Destroy(Instantiate(DeathExplosionPrefab, player.transform.position, Quaternion.identity),3.0f);
+        Destroy(spawnedWitch,1.0f);
+        spawningEnabled = false;
+    }
+
+    public void RescuePlayer()
+    {
+        spawningEnabled = true;
+        player.transform.position = playerStartPosition;
+        GetComponent<AudioSource>().PlayOneShot(rescueSound);
+    }
 }
