@@ -13,7 +13,7 @@ public class LightBall : MonoBehaviour {
     public AudioClip chargeSound;
     public AudioClip fireSound;
     private AudioSource audioSource;
-    private static float pitchMax = 2;
+    private static float pitchMax = 2.1f;
     private static float pitchMin = 0.8f;
 
     private ParticleSystem ballParticleSystem;

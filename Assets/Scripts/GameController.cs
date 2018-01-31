@@ -124,6 +124,6 @@ public class GameController : MonoBehaviour {
 
     public void Win()
     {
-        LevelManager.Instance.LoadScene("WinScene");
+        FindObjectOfType<LevelManager>().LoadScene("WinScene");
     }
 }
